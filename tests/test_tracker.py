@@ -46,8 +46,8 @@ class TestTracker:
         comment.click(timeout=5000)
 
         comment_input = page.locator('textarea')
-        comment_input.click()
         comment_input.fill("Комментарий")
+        assert comment_input.input_value() == "Комментарий"
 
         confirm_button = page.locator('.XRVp4xxKofwvTTn6y8Y2')
         confirm_button.click()
