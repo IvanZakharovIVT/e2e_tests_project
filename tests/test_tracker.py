@@ -1,14 +1,12 @@
 import time
 
-from datetime import datetime
-
 from fixtures.page import page
 from settings import TRACKER_USERNAME, TRACKER_PASSWORD
 
 
 class TestTracker:
-    # comment_text = "Разработка первых автотестов для работы с playwright"
-    comment_text = "playwright"
+    comment_text = "Разработка первых автотестов для работы с playwright"
+
     def test_set_and_remove_time(self, page):
         page.goto("http://track.nordclan/timereports")
         input_username = page.locator('input[name="username"]')
@@ -46,8 +44,8 @@ class TestTracker:
         comment.click(timeout=5000)
 
         comment_input = page.locator('textarea')
-        comment_input.fill("Комментарий")
-        assert comment_input.input_value() == "Комментарий"
+        comment_input.fill(self.comment_text, timeout=5000)
+        assert comment_input.input_value(timeout=5000) == self.comment_text
 
         confirm_button = page.locator('.XRVp4xxKofwvTTn6y8Y2')
         confirm_button.click()
@@ -68,7 +66,7 @@ class TestTracker:
         textarea.wait_for(timeout=2000, state="attached")
 
         result_value = textarea.input_value()
-        assert result_value == "Комментарий"
+        assert result_value == self.comment_text
 
         time_value = last_element.locator('.FHz42jZNAtn160bzlTQK').text_content()
         assert time_value.split(' ')[1] == date_to_check
