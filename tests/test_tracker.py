@@ -1,4 +1,5 @@
 import time
+from datetime import datetime
 
 from fixtures.page import page
 from settings import TRACKER_USERNAME, TRACKER_PASSWORD
@@ -45,3 +46,16 @@ class TestTracker:
 
         confirm_button = page.locator('.XRVp4xxKofwvTTn6y8Y2')
         confirm_button.click()
+
+        total_toggle_comment = page.locator('.totalToggleComment')
+        total_toggle_comment.click()
+
+        toggle_list_locator = page.locator('.rGOECBNcTT2M4YU4zlJX')
+        last_element = toggle_list_locator.locator('.SBRJyKo57H5f0mT3YNNL').last
+
+        result_value = last_element.locator('textarea').last.input_value()
+        assert result_value == "Комментарий"
+
+        time_value = last_element.locator('.FHz42jZNAtn160bzlTQK').text_content(timeout=10)
+        assert time_value.split(' ')[1] == datetime.today().date().strftime('%d.%m')
+
