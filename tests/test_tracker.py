@@ -1,4 +1,4 @@
-import time
+from playwright.sync_api import expect
 
 from fixtures.page import page
 from settings import TRACKER_USERNAME, TRACKER_PASSWORD
@@ -54,7 +54,6 @@ class TestTracker:
         date_to_check = page.locator(
             f'.GSJEaIhqhOj5a1bwaWXu > th:nth-child({toggle_count + 2}) > div'
         ).text_content()[2:]
-        time.sleep(2)
 
         total_toggle_comment = page.locator('.totalToggleComment')
         total_toggle_comment.click()
@@ -65,8 +64,7 @@ class TestTracker:
         textarea = last_element.locator('textarea')
         textarea.wait_for(timeout=2000, state="attached")
 
-        result_value = textarea.input_value()
-        assert result_value == self.comment_text
+        expect(textarea).to_have_value(self.comment_text, timeout=5000)
 
         time_value = last_element.locator('.FHz42jZNAtn160bzlTQK').text_content()
         assert time_value.split(' ')[1] == date_to_check
