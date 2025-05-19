@@ -26,6 +26,12 @@ class TestTrackerPages:
 
         my_project_page.link_to_time_reports()
 
+        time_report_page.add_activity()
+
+        add_activity_window.find_activity(self.TASK_NAME)
+
+        add_activity_window.add_activity(self.TASK_NAME)
+
         row_number = None
 
         for index, locator in enumerate(page.locator('tr.taskRow > td:nth-child(1) >div >div > a').all(), 1):
@@ -34,12 +40,6 @@ class TestTrackerPages:
                 break
 
         assert row_number is not None
-
-        time_report_page.add_activity()
-
-        add_activity_window.find_activity(self.TASK_NAME)
-
-        add_activity_window.add_activity(self.TASK_NAME)
 
         toggles = page.locator(f'tr.taskRow:nth-child({row_number}) > td > div > div > .toggleComment')
         toggle_count = len(toggles.all())
