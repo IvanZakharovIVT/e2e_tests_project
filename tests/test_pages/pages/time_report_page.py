@@ -40,6 +40,7 @@ class TimeReportPage(BasePage):
         comment.click(timeout=5000)
 
         comment_input = self.page.locator('div.SUt_25F2Dvm9m866G6fm  > textarea')
+        comment_input.click()
         comment_input.fill(comment_text, timeout=5000)
         expect(comment_input).to_have_value(comment_text, timeout=5000)
 
