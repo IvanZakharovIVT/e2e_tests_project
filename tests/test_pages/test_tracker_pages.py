@@ -2,6 +2,7 @@ from playwright.sync_api import expect
 
 from fixtures.page import page
 from settings import TRACKER_USERNAME, TRACKER_PASSWORD
+from tests.test_pages.pages.add_new_activity_window import AddNewActivityWindow
 from tests.test_pages.pages.my_projects_page import MyProjectsPage
 from tests.test_pages.pages.sign_in_page import SignInPage
 from tests.test_pages.pages.time_report_page import TimeReportPage
@@ -16,6 +17,7 @@ class TestTrackerPages:
         sign_in_page = SignInPage(page)
         my_project_page = MyProjectsPage(page)
         time_report_page = TimeReportPage(page)
+        add_activity_window = AddNewActivityWindow(page)
 
         sign_in_page.insert_username(TRACKER_USERNAME)
         sign_in_page.insert_password(TRACKER_PASSWORD)
@@ -25,9 +27,19 @@ class TestTrackerPages:
 
         time_report_page.add_activity()
 
+        add_activity_window.find_activity()
+
+        add_activity_window.add_activity()
+
+        toggles = page.locator('.toggleComment')
+        toggle_count = len(toggles.all())
+        date_to_check = self.page.locator(
+            f'.GSJEaIhqhOj5a1bwaWXu > th:nth-child({toggle_count + 2}) > div'
+        ).text_content()[2:]
+
         time_report_page.add_new_day_time()
 
-        time_report_page.add_comment_to_last_day(self.comment_text)
+        time_report_page.add_comment_to_last_day(self.comment_text, toggle_count)
 
         last_element = time_report_page.get_last_report_item()
 
@@ -36,4 +48,4 @@ class TestTrackerPages:
         expect(textarea).to_have_value(self.comment_text, timeout=5000)
 
         time_value = last_element.locator('.FHz42jZNAtn160bzlTQK').text_content()
-        assert time_value.split(' ')[1] == time_report_page.date_to_check
+        assert time_value.split(' ')[1] == date_to_check
