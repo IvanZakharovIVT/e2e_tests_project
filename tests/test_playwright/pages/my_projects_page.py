@@ -17,6 +17,13 @@ class MyProjectsPage(BasePage):
         self.page.locator(f'div[aria-label="{tag_name}"]').click()
         assert "backend" in self.page.locator('div[id="react-select-5--value"]').text_content()
 
+    def select_project_type(self, project_type: int):
+        select_locator = self.page.locator('div[id="react-select-4--value"]')
+        select_locator.click()
+        self.page.locator(f'div[id="react-select-4--option-{project_type}"]').click()
+        selected_result = select_locator.text_content()
+        assert "Внутренний" in selected_result or "Internal" in selected_result
+
     def insert_select_tag_text(self, select_text: str):
         search_input = self.page.locator('.L40Ce1dkZzDwkTX8jmo3')
         search_input.fill(select_text)
