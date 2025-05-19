@@ -33,7 +33,7 @@ class TestTrackerPages:
 
         toggles = page.locator('.toggleComment')
         toggle_count = len(toggles.all())
-        date_to_check = self.page.locator(
+        date_to_check = page.locator(
             f'.GSJEaIhqhOj5a1bwaWXu > th:nth-child({toggle_count + 2}) > div'
         ).text_content()[2:]
 
