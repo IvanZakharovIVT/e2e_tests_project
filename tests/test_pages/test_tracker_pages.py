@@ -11,6 +11,7 @@ from tests.test_pages.pages.time_report_page import TimeReportPage
 class TestTrackerPages:
     comment_text = "Разработка первых автотестов для работы с playwright (page object_model)"
     TRACKER_URL = "http://track.nordclan/timereports"
+    TASK_NAME = "Подготовка к интервью"
 
     def test_set_time(self, page):
         page.goto(self.TRACKER_URL)
@@ -25,13 +26,22 @@ class TestTrackerPages:
 
         my_project_page.link_to_time_reports()
 
+        row_number = None
+
+        for index, locator in enumerate(page.locator('tr.taskRow > td:nth-child(1) >div >div > a').all(), 1):
+            if self.TASK_NAME in locator.text_content():
+                row_number = index
+                break
+
+        assert row_number is not None
+
         time_report_page.add_activity()
 
-        add_activity_window.find_activity()
+        add_activity_window.find_activity(self.TASK_NAME)
 
-        add_activity_window.add_activity()
+        add_activity_window.add_activity(self.TASK_NAME)
 
-        toggles = page.locator('.toggleComment')
+        toggles = page.locator(f'tr.taskRow:nth-child({row_number}) > td > div > div > .toggleComment')
         toggle_count = len(toggles.all())
         date_to_check = page.locator(
             f'.GSJEaIhqhOj5a1bwaWXu > th:nth-child({toggle_count + 2}) > div'
@@ -39,9 +49,9 @@ class TestTrackerPages:
 
         time_report_page.add_new_day_time()
 
-        time_report_page.add_comment_to_last_day(self.comment_text, toggle_count)
+        time_report_page.add_comment_to_last_day(self.comment_text, toggle_count, row_number)
 
-        last_element = time_report_page.get_last_report_item()
+        last_element = time_report_page.get_last_report_item(row_number)
 
         textarea = last_element.locator('textarea')
 

@@ -1,10 +1,9 @@
-from playwright.sync_api import expect
+from playwright.sync_api import expect, Page
 
 from tests.test_pages.pages.base_page import BasePage
 
 
 class TimeReportPage(BasePage):
-
     def add_activity(self):
         add_activity = self.page.locator('.addActivity')
         add_activity.click()
@@ -14,8 +13,10 @@ class TimeReportPage(BasePage):
         first_untrack_day.click()
         first_untrack_day.fill("8")
 
-    def add_comment_to_last_day(self, comment_text:str, toggle_count: int):
-        comment = self.page.locator(f'tr.taskRow > td:nth-child({toggle_count + 2}) > div > div > .toggleComment')
+    def add_comment_to_last_day(self, comment_text:str, toggle_count: int, row_number: int):
+        comment = self.page.locator(
+            f'tr.taskRow:nth-child({row_number}) > td:nth-child({toggle_count + 2}) > div > div > .toggleComment'
+        )
         comment.click(timeout=5000)
 
         comment_input = self.page.locator('div.SUt_25F2Dvm9m866G6fm  > textarea')
@@ -26,8 +27,10 @@ class TimeReportPage(BasePage):
         confirm_button = self.page.locator('.XRVp4xxKofwvTTn6y8Y2')
         confirm_button.click()
 
-    def get_last_report_item(self):
-        total_toggle_comment = self.page.locator('.totalToggleComment')
+    def get_last_report_item(self, row_number: int):
+        total_toggle_comment = self.page.locator(
+            f'tr.taskRow:nth-child({row_number}) > td > div > .totalToggleComment'
+        )
         total_toggle_comment.click()
 
         toggle_list_locator =self. page.locator('.rGOECBNcTT2M4YU4zlJX')
