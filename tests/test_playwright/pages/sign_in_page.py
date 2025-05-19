@@ -1,4 +1,4 @@
-from tests.test_pages.pages.base_page import BasePage
+from tests.test_playwright.pages.base_page import BasePage
 
 
 class SignInPage(BasePage):

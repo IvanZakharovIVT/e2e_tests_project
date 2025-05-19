@@ -2,10 +2,10 @@ from playwright.sync_api import expect
 
 from fixtures.page import page
 from settings import TRACKER_USERNAME, TRACKER_PASSWORD
-from tests.test_pages.pages.add_new_activity_window import AddNewActivityWindow
-from tests.test_pages.pages.my_projects_page import MyProjectsPage
-from tests.test_pages.pages.sign_in_page import SignInPage
-from tests.test_pages.pages.time_report_page import TimeReportPage
+from tests.test_playwright.pages.add_new_activity_window import AddNewActivityWindow
+from tests.test_playwright.pages.my_projects_page import MyProjectsPage
+from tests.test_playwright.pages.sign_in_page import SignInPage
+from tests.test_playwright.pages.time_report_page import TimeReportPage
 
 
 class TestTrackerPages:
