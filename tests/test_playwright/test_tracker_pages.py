@@ -47,7 +47,7 @@ class TestTrackerPages:
             f'.GSJEaIhqhOj5a1bwaWXu > th:nth-child({toggle_count + 2}) > div'
         ).text_content()[2:]
 
-        time_report_page.add_new_day_time()
+        time_report_page.add_new_day_time(toggle_count, row_number)
 
         time_report_page.add_comment_to_last_day(self.comment_text, toggle_count, row_number)
 

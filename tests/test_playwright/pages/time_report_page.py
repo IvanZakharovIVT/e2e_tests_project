@@ -4,17 +4,18 @@ from tests.test_playwright.pages.base_page import BasePage
 
 
 class TimeReportPage(BasePage):
-    ADD_ACTIVITY_BUTTON_LOCATOR = ''
-    INPUT_TIME_FIELD_LOCATOR = ''
-    COMMENT_TEXTAREA_LOCATOR = ''
-    CONFIRM_BUTTON_LOCATOR = ''
+    ADD_ACTIVITY_BUTTON_LOCATOR = '.addActivity'
+    COMMENT_TEXTAREA_LOCATOR = 'div.SUt_25F2Dvm9m866G6fm  > textarea'
+    CONFIRM_BUTTON_LOCATOR = '.XRVp4xxKofwvTTn6y8Y2'
 
     def add_activity(self):
-        add_activity = self.page.locator('.addActivity')
+        add_activity = self.page.locator(self.ADD_ACTIVITY_BUTTON_LOCATOR)
         add_activity.click()
 
-    def add_new_day_time(self):
-        first_untrack_day = self.page.locator('input[value="0"]').first
+    def add_new_day_time(self, toggle_count: int, row_number: int):
+        first_untrack_day = self.page.locator(
+            f'tr.taskRow:nth-child({row_number}) > td:nth-child({toggle_count + 2}) > div > div > input[value="0"]'
+        )
         first_untrack_day.click()
         first_untrack_day.fill("8")
 
@@ -24,12 +25,12 @@ class TimeReportPage(BasePage):
         )
         comment.click(timeout=5000)
 
-        comment_input = self.page.locator('div.SUt_25F2Dvm9m866G6fm  > textarea')
+        comment_input = self.page.locator(self.COMMENT_TEXTAREA_LOCATOR)
         comment_input.click()
         comment_input.fill(comment_text, timeout=5000)
         expect(comment_input).to_have_value(comment_text, timeout=5000)
 
-        confirm_button = self.page.locator('.XRVp4xxKofwvTTn6y8Y2')
+        confirm_button = self.page.locator(self.CONFIRM_BUTTON_LOCATOR)
         confirm_button.click()
 
     def get_last_report_item(self, row_number: int):
