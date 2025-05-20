@@ -6,6 +6,7 @@ from tests.test_playwright.pages.sign_in_page import SignInPage
 
 class TestRealCase:
     TRACKER_URL = "http://track.nordclan/timereports"
+    PROJECT_HREF = "/projects"
 
     def test_real_case(self, page):
         page.goto(self.TRACKER_URL)
@@ -18,7 +19,6 @@ class TestRealCase:
         sign_in_page.sign_in()
 
         current_href = my_project_page.get_current_page_selector_href()
-        assert current_href == "/projects"
+        assert current_href == self.PROJECT_HREF
 
         my_project_page.select_project_type(1)
-

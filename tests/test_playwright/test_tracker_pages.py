@@ -12,6 +12,7 @@ class TestTrackerPages:
     comment_text = "Разработка первых автотестов для работы с playwright (page object_model)"
     TRACKER_URL = "http://track.nordclan/timereports"
     TASK_NAME = "Подготовка к интервью"
+    ROW_LABEL_LOCATOR = 'tr.taskRow > td:nth-child(1) >div >div > a'
 
     def test_set_time(self, page):
         page.goto(self.TRACKER_URL)
@@ -34,7 +35,7 @@ class TestTrackerPages:
 
         row_number = None
 
-        for index, locator in enumerate(page.locator('tr.taskRow > td:nth-child(1) >div >div > a').all(), 1):
+        for index, locator in enumerate(page.locator(self.ROW_LABEL_LOCATOR).all(), 1):
             if self.TASK_NAME in locator.text_content():
                 row_number = index
                 break
