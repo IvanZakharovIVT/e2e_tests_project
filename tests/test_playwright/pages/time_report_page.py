@@ -4,6 +4,11 @@ from tests.test_playwright.pages.base_page import BasePage
 
 
 class TimeReportPage(BasePage):
+    ADD_ACTIVITY_BUTTON_LOCATOR = ''
+    INPUT_TIME_FIELD_LOCATOR = ''
+    COMMENT_TEXTAREA_LOCATOR = ''
+    CONFIRM_BUTTON_LOCATOR = ''
+
     def add_activity(self):
         add_activity = self.page.locator('.addActivity')
         add_activity.click()
@@ -33,6 +38,6 @@ class TimeReportPage(BasePage):
         )
         total_toggle_comment.click()
 
-        toggle_list_locator =self. page.locator('.rGOECBNcTT2M4YU4zlJX')
+        toggle_list_locator =self.page.locator('.rGOECBNcTT2M4YU4zlJX')
         last_element = toggle_list_locator.locator('.SBRJyKo57H5f0mT3YNNL').last
         return last_element
