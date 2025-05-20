@@ -1,15 +1,14 @@
 from fixtures.page import page
-from settings import TRACKER_USERNAME, TRACKER_PASSWORD
+from settings import TRACKER_USERNAME, TRACKER_PASSWORD, TRACKER_URL
 from tests.test_playwright.pages.my_projects_page import MyProjectsPage
 from tests.test_playwright.pages.sign_in_page import SignInPage
 
 
 class TestRealCase:
-    TRACKER_URL = "http://track.nordclan/timereports"
     PROJECT_HREF = "/projects"
 
     def test_real_case(self, page):
-        page.goto(self.TRACKER_URL)
+        page.goto(TRACKER_URL)
 
         sign_in_page = SignInPage(page)
         my_project_page = MyProjectsPage(page)
@@ -23,4 +22,4 @@ class TestRealCase:
 
         my_project_page.select_project_type(1)
 
-        my_project_page.insert_select_text('Привет')
+        my_project_page.insert_select_text("Привет")

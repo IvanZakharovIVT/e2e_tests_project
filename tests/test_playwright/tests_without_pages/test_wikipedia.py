@@ -1,6 +1,3 @@
-import re
-from playwright.sync_api import Page, expect, sync_playwright
-
 from fixtures.page import page
 
 class TestFirst:

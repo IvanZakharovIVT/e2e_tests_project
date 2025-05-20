@@ -1,16 +1,15 @@
-from fixtures.page import page
-from settings import TRACKER_USERNAME, TRACKER_PASSWORD
+from tests.test_playwright.page import page
+from settings import TRACKER_USERNAME, TRACKER_PASSWORD, TRACKER_URL
 from tests.test_playwright.pages.my_projects_page import MyProjectsPage
 from tests.test_playwright.pages.sign_in_page import SignInPage
 
 
 class TestTrackerProjectPages:
     comment_text = "Разработка первых автотестов для работы с playwright (page object_model)"
-    TRACKER_URL = "http://track.nordclan/timereports"
     TASK_NAME = "Подготовка к интервью"
 
     def test_set_time(self, page):
-        page.goto(self.TRACKER_URL)
+        page.goto(TRACKER_URL)
 
         sign_in_page = SignInPage(page)
         my_project_page = MyProjectsPage(page)
