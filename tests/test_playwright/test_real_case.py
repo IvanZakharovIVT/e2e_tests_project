@@ -55,6 +55,6 @@ class TestRealCase:
 
         my_project_page.logout()
 
-        sigh_in_page_title = page.locator(".YhCboO0sYx3Lb7l8jhSG")
+        sigh_in_page_title = page.locator("div.VEk5WthgxYcIVhuIU03A > div > div.YhCboO0sYx3Lb7l8jhSG")
 
         assert sigh_in_page_title.text_content().strip() == "[Epic]"
