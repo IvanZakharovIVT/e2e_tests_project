@@ -6,6 +6,7 @@ from tests.test_playwright.pages.sign_in_page import SignInPage
 
 class TestRealCase:
     PROJECT_HREF = "/projects"
+    SEARCH_INPUT_VALUE = "Привет"
 
     def test_real_case(self, page):
         page.goto(TRACKER_URL)
@@ -17,9 +18,11 @@ class TestRealCase:
         sign_in_page.insert_password(TRACKER_PASSWORD)
         sign_in_page.sign_in()
 
-        current_page_selector = my_project_page.current_page_selector
+        current_page_selector = my_project_page.current_page_locator
         assert current_page_selector.get_attribute('href') == "/projects"
 
         my_project_page.select_project_type(1)
+        assert my_project_page.project_type_locator.text_content().strip() == "×Internal"
 
-        my_project_page.insert_select_text("Привет")
+        my_project_page.insert_select_text(self.SEARCH_INPUT_VALUE)
+        assert my_project_page.search_input_locator.input_value() == self.SEARCH_INPUT_VALUE
