@@ -5,6 +5,7 @@ from tests.test_playwright.pages.sign_in_page import SignInPage
 
 
 class TestRealCase:
+    """Основной тест по кейсу"""
     PROJECT_HREF = "/projects"
     SEARCH_INPUT_VALUE = "Привет"
 
@@ -19,7 +20,7 @@ class TestRealCase:
         sign_in_page.sign_in()
 
         current_page_selector = my_project_page.current_page_locator
-        assert current_page_selector.get_attribute('href') == "/projects"
+        assert current_page_selector.get_attribute('href') == self.PROJECT_HREF
 
         my_project_page.select_project_type(1)
         assert my_project_page.project_type_locator.text_content().strip() == "×Internal"

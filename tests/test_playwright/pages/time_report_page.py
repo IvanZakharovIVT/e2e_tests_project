@@ -1,13 +1,18 @@
-from playwright.sync_api import expect
+from playwright.sync_api import expect, Locator
 
 from tests.test_playwright.pages.base_page import BasePage
 
 
 class TimeReportPage(BasePage):
-    """траница отчетов по времени"""
+    """Страница отчетов по времени"""
     ADD_ACTIVITY_BUTTON_LOCATOR = '.addActivity'
     COMMENT_TEXTAREA_LOCATOR = 'div.SUt_25F2Dvm9m866G6fm  > textarea'
     CONFIRM_BUTTON_LOCATOR = '.XRVp4xxKofwvTTn6y8Y2'
+
+    @property
+    def activity_reports(self) -> Locator:
+        toggle_list_locator = self.page.locator('.rGOECBNcTT2M4YU4zlJX')
+        return toggle_list_locator.locator('.SBRJyKo57H5f0mT3YNNL')
 
     def add_activity(self):
         """Добавление новой задачи"""
@@ -34,16 +39,12 @@ class TimeReportPage(BasePage):
         comment_input.fill(comment_text, timeout=5000)
         expect(comment_input).to_have_value(comment_text, timeout=5000)
 
+    def confirm_comment(self):
         confirm_button = self.page.locator(self.CONFIRM_BUTTON_LOCATOR)
         confirm_button.click()
 
-    def get_last_report_item(self, row_number: int):
-        """Возвращает последний элемент для проверки"""
+    def click_to_all_activity_icon(self, row_number: int):
         total_toggle_comment = self.page.locator(
             f'tr.taskRow:nth-child({row_number}) > td > div > .totalToggleComment'
         )
         total_toggle_comment.click()
-
-        toggle_list_locator =self.page.locator('.rGOECBNcTT2M4YU4zlJX')
-        last_element = toggle_list_locator.locator('.SBRJyKo57H5f0mT3YNNL').last
-        return last_element

@@ -56,9 +56,11 @@ class TestTrackerPages:
         # Добавление времени и комментария по строке и столбцу
         time_report_page.add_new_day_time(toggle_count, row_number, 8)
         time_report_page.add_comment_to_last_day(self.comment_text, toggle_count, row_number)
+        time_report_page.confirm_comment()
 
         # Получение последнего элемента в списке отчету по всем дням
-        last_element = time_report_page.get_last_report_item(row_number)
+        time_report_page.click_to_all_activity_icon(row_number)
+        last_element = time_report_page.activity_reports.last
 
         textarea = last_element.locator("textarea")
 
