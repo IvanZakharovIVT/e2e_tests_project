@@ -1,13 +1,14 @@
 from playwright.sync_api import expect
 
-from fixtures.page import page
+from fixtures.conftest import page
 from settings import TRACKER_USERNAME, TRACKER_PASSWORD
 
 
 class TestTracker:
+    """Черновая версия теста добавления трудозатраты"""
     comment_text = "Разработка первых автотестов для работы с playwright"
 
-    def test_set_and_remove_time(self, page):
+    def test_set_raw(self, page):
         page.goto("http://track.nordclan/timereports")
         input_username = page.locator('input[name="username"]')
         input_username.fill(TRACKER_USERNAME)

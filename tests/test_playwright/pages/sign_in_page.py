@@ -2,6 +2,7 @@ from tests.test_playwright.pages.base_page import BasePage
 
 
 class SignInPage(BasePage):
+    """Страница авторизации"""
     INPUT_USERNAME_LOCATOR = 'input[name="username"]'
     INPUT_PASSWORD_LOCATOR = 'input[name="password"]'
     SUBMIT_BUTTON = 'button[type="submit"]'

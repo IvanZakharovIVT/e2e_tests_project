@@ -1,7 +1,8 @@
 from fixtures.page import page
 
-class TestFirst:
-    def test_using_fixture(self, page):
+class TestWikipedia:
+    def test_find_python(self, page):
+        """Поиск слова Python на странице Гвидо Ван Россума"""
         page.goto("https://www.wikipedia.org")
         input_field = page.locator('input[id="searchInput"]')
         input_field.fill("Гвидо Ван Россум")
