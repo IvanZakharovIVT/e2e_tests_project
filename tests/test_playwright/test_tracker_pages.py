@@ -54,7 +54,7 @@ class TestTrackerPages:
         ).text_content()[2:]
 
         # Добавление времени и комментария по строке и столбцу
-        time_report_page.add_new_day_time(toggle_count, row_number)
+        time_report_page.add_new_day_time(toggle_count, row_number, 8)
         time_report_page.add_comment_to_last_day(self.comment_text, toggle_count, row_number)
 
         # Получение последнего элемента в списке отчету по всем дням
