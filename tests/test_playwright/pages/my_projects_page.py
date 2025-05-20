@@ -4,12 +4,12 @@ from tests.test_playwright.pages.base_page import BasePage
 
 
 class MyProjectsPage(BasePage):
-    """Страница 'Мои проекты'"""
-    TIME_REPORT_BUTTON_LOCATOR = 'a[href="/timereports"]'
-    ACTIVE_PAGE_BUTTON = 'li > a.whSN_60dtoulJ6d2dCnt'
-    TAG_SELECTOR_LOCATOR = 'div[id="react-select-5--value"]'
-    PROJECT_TYPE_SELECT_LOCATOR = 'div[id="react-select-4--value"]'
-    SEARCH_FIELD_LOCATOR = '.L40Ce1dkZzDwkTX8jmo3'
+    """Страница "Мои проекты"""
+    TIME_REPORT_BUTTON_LOCATOR = "a[href='/timereports']"
+    ACTIVE_PAGE_BUTTON = "li > a.whSN_60dtoulJ6d2dCnt"
+    TAG_SELECTOR_LOCATOR = "div[id='react-select-5--value']"
+    PROJECT_TYPE_SELECT_LOCATOR = "div[id='react-select-4--value']"
+    SEARCH_FIELD_LOCATOR = ".L40Ce1dkZzDwkTX8jmo3"
 
     @property
     def current_page_locator(self) -> Locator:
@@ -31,13 +31,13 @@ class MyProjectsPage(BasePage):
         """Выбор тега"""
         select_locator = self.page.locator(self.TAG_SELECTOR_LOCATOR)
         select_locator.click()
-        self.page.locator(f'div[aria-label="{tag_name}"]').click()
+        self.page.locator(f"div[aria-label='{tag_name}']").click()
         assert tag_name in select_locator.text_content()
 
     def select_project_type(self, project_type: int):
         """Выбор типа проекта"""
         self.project_type_locator.click()
-        self.page.locator(f'div[id="react-select-4--option-{project_type}"]').click()
+        self.page.locator(f"div[id='react-select-4--option-{project_type}']").click()
 
     def insert_select_text(self, select_text: str):
         """Ввод текста для поиска"""
