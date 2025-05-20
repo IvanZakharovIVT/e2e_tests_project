@@ -1,9 +1,9 @@
 from playwright.sync_api import expect, Locator
 
-from tests.test_playwright.pages.base_page import BasePage
+from tests.test_playwright.pages.base_authorized_page import BaseAuthorizedPage
 
 
-class TimeReportPage(BasePage):
+class TimeReportPage(BaseAuthorizedPage):
     """Страница отчетов по времени"""
     ADD_ACTIVITY_BUTTON_LOCATOR = ".addActivity"
     COMMENT_TEXTAREA_LOCATOR = "div.SUt_25F2Dvm9m866G6fm  > textarea"

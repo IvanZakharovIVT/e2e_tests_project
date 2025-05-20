@@ -1,9 +1,9 @@
 from playwright.sync_api import Locator
 
-from tests.test_playwright.pages.base_page import BasePage
+from tests.test_playwright.pages.base_authorized_page import BaseAuthorizedPage
 
 
-class MyProjectsPage(BasePage):
+class MyProjectsPage(BaseAuthorizedPage):
     """Страница "Мои проекты"""
     TIME_REPORT_BUTTON_LOCATOR = "a[href='/timereports']"
     ACTIVE_PAGE_BUTTON = "li > a.whSN_60dtoulJ6d2dCnt"

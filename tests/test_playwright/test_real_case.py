@@ -29,6 +29,7 @@ class TestRealCase:
         assert my_project_page.search_input_locator.input_value() == self.SEARCH_INPUT_VALUE
 
     def test_auth_error(self, page):
+        """Тест ошибки авторизации"""
         page.goto(TRACKER_URL)
 
         sign_in_page = SignInPage(page)
@@ -40,3 +41,20 @@ class TestRealCase:
         error_message_locator = page.locator(".B0FQjFgqnsXrRmLKgQG3")
 
         assert error_message_locator.text_content().strip() == "Неверный логин/пароль. Проверьте данные"
+
+    def test_logout(self, page):
+        """Тест выхода из системы"""
+        page.goto(TRACKER_URL)
+
+        sign_in_page = SignInPage(page)
+        my_project_page = MyProjectsPage(page)
+
+        sign_in_page.insert_username(TRACKER_USERNAME)
+        sign_in_page.insert_password(TRACKER_PASSWORD)
+        sign_in_page.sign_in()
+
+        my_project_page.logout()
+
+        sigh_in_page_title = page.locator(".YhCboO0sYx3Lb7l8jhSG")
+
+        assert sigh_in_page_title.text_content().strip() == "[Epic]"
