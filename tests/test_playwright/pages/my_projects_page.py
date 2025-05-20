@@ -28,7 +28,7 @@ class MyProjectsPage(BasePage):
         selected_result = select_locator.text_content()
         assert "Внутренний" in selected_result or "Internal" in selected_result
 
-    def insert_select_tag_text(self, select_text: str):
+    def insert_select_text(self, select_text: str):
         search_input = self.page.locator(self.SEARCH_FIELD_LOCATOR)
         search_input.fill(select_text)
         search_input.press("Enter")

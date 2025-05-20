@@ -22,3 +22,5 @@ class TestRealCase:
         assert current_href == self.PROJECT_HREF
 
         my_project_page.select_project_type(1)
+
+        my_project_page.insert_select_text('Привет')

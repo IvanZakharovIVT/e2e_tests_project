@@ -22,7 +22,7 @@ class TestTrackerProjectPages:
         current_href = my_project_page.get_current_page_selector_href()
         assert current_href == "/projects"
 
-        my_project_page.insert_select_tag_text('NordClan')
+        my_project_page.insert_select_text('NordClan')
 
         my_project_page.select_tag("backend")
 
