@@ -1,6 +1,6 @@
 from playwright.sync_api import expect
 
-from fixtures.conftest import page
+from conftest import page
 from settings import TRACKER_USERNAME, TRACKER_PASSWORD
 
 

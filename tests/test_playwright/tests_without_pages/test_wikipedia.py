@@ -1,4 +1,4 @@
-from fixtures.page import page
+from conftest import page
 
 class TestWikipedia:
     def test_find_python(self, page):

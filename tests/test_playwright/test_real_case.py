@@ -1,4 +1,4 @@
-from fixtures.page import page
+from conftest import page
 from settings import TRACKER_USERNAME, TRACKER_PASSWORD, TRACKER_URL
 from tests.test_playwright.pages.my_projects_page import MyProjectsPage
 from tests.test_playwright.pages.sign_in_page import SignInPage
