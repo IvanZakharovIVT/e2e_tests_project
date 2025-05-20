@@ -17,8 +17,8 @@ class TestRealCase:
         sign_in_page.insert_password(TRACKER_PASSWORD)
         sign_in_page.sign_in()
 
-        current_href = my_project_page.get_current_page_selector_href()
-        assert current_href == self.PROJECT_HREF
+        current_page_selector = my_project_page.current_page_selector
+        assert current_page_selector.get_attribute('href') == "/projects"
 
         my_project_page.select_project_type(1)
 

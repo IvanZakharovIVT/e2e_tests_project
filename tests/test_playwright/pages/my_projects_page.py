@@ -1,3 +1,5 @@
+from playwright.sync_api import Locator
+
 from tests.test_playwright.pages.base_page import BasePage
 
 
@@ -13,8 +15,9 @@ class MyProjectsPage(BasePage):
         time_report_button = self.page.locator(self.TIME_REPORT_BUTTON_LOCATOR)
         time_report_button.click()
 
-    def get_current_page_selector_href(self) -> str:
-        return self.page.locator(self.ACTIVE_PAGE_BUTTON).get_attribute('href')
+    @property
+    def current_page_selector(self) -> Locator:
+        return self.page.locator(self.ACTIVE_PAGE_BUTTON)
 
     def select_tag(self, tag_name: str):
         """Выбор тега"""
