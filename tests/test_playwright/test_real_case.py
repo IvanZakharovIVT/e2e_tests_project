@@ -10,6 +10,7 @@ class TestRealCase:
     SEARCH_INPUT_VALUE = "Привет"
 
     def test_real_case(self, page):
+        """Полное прохождение теста по кейсу задания"""
         page.goto(TRACKER_URL)
 
         sign_in_page = SignInPage(page)
