@@ -27,3 +27,16 @@ class TestRealCase:
 
         my_project_page.insert_select_text(self.SEARCH_INPUT_VALUE)
         assert my_project_page.search_input_locator.input_value() == self.SEARCH_INPUT_VALUE
+
+    def test_auth_error(self, page):
+        page.goto(TRACKER_URL)
+
+        sign_in_page = SignInPage(page)
+
+        sign_in_page.insert_username("wrong_username")
+        sign_in_page.insert_password("wrong_password")
+        sign_in_page.sign_in()
+
+        error_message_locator = page.locator(".B0FQjFgqnsXrRmLKgQG3")
+
+        assert error_message_locator.text_content().strip() == "Неверный логин/пароль. Проверьте данные"
