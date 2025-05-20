@@ -7,3 +7,7 @@ class BaseAuthorizedPage(BasePage):
     def logout(self):
         logout_icon = self.page.locator(self.LOGOUT_LOCATOR)
         logout_icon.click()
+
+    def link_to_page_from_sidebar(self, sidebar_href: str):
+        time_report_button = self.page.locator(f".DrbfUacevysuNgEQlYpu > a[href='{sidebar_href}']")
+        time_report_button.click()

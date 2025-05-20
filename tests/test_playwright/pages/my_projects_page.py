@@ -5,7 +5,6 @@ from tests.test_playwright.pages.base_authorized_page import BaseAuthorizedPage
 
 class MyProjectsPage(BaseAuthorizedPage):
     """Страница "Мои проекты"""
-    TIME_REPORT_BUTTON_LOCATOR = "a[href='/timereports']"
     ACTIVE_PAGE_BUTTON = "li > a.whSN_60dtoulJ6d2dCnt"
     TAG_SELECTOR_LOCATOR = "div[id='react-select-5--value']"
     PROJECT_TYPE_SELECT_LOCATOR = "div[id='react-select-4--value']"
@@ -22,10 +21,6 @@ class MyProjectsPage(BaseAuthorizedPage):
     @property
     def search_input_locator(self) -> Locator:
         return self.page.locator(self.SEARCH_FIELD_LOCATOR)
-
-    def link_to_time_reports(self):
-        time_report_button = self.page.locator(self.TIME_REPORT_BUTTON_LOCATOR)
-        time_report_button.click()
 
     def select_tag(self, tag_name: str):
         """Выбор тега"""

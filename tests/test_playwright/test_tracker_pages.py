@@ -29,7 +29,7 @@ class TestTrackerPages:
         sign_in_page.sign_in()
 
         # Переход на страницу отчетов по времени
-        my_project_page.link_to_time_reports()
+        my_project_page.link_to_page_from_sidebar("/timereports")
 
         # Открытие диалогового окна добавления новой записи
         time_report_page.add_activity()
