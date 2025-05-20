@@ -10,7 +10,7 @@ from tests.test_playwright.pages.time_report_page import TimeReportPage
 
 class TestTrackerPages:
     """Тест добавления новой записи в трекер с использованием page object_model"""
-    comment_text = "Разработка первых автотестов для работы с playwright (page object_model)"
+    COMMENT_TEXT = "Разработка первых автотестов для работы с playwright (page object_model)"
     TASK_NAME = "Подготовка к интервью"
     ROW_LABEL_LOCATOR = "tr.taskRow > td:nth-child(1) >div >div > a"
 
@@ -55,7 +55,7 @@ class TestTrackerPages:
 
         # Добавление времени и комментария по строке и столбцу
         time_report_page.add_new_day_time(toggle_count, row_number, 8)
-        time_report_page.add_comment_to_last_day(self.comment_text, toggle_count, row_number)
+        time_report_page.add_comment_to_last_day(self.COMMENT_TEXT, toggle_count, row_number)
         time_report_page.confirm_comment()
 
         # Получение последнего элемента в списке отчету по всем дням
@@ -64,7 +64,7 @@ class TestTrackerPages:
 
         textarea = last_element.locator("textarea")
 
-        expect(textarea).to_have_value(self.comment_text, timeout=5000)
+        expect(textarea).to_have_value(self.COMMENT_TEXT, timeout=5000)
 
         time_value = last_element.locator(".FHz42jZNAtn160bzlTQK").text_content()
         assert time_value.split(" ")[1] == date_to_check
