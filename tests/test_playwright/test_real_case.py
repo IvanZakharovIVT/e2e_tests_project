@@ -39,9 +39,8 @@ class TestRealCase:
         sign_in_page.insert_password("wrong_password")
         sign_in_page.sign_in()
 
-        error_message_locator = page.locator(".B0FQjFgqnsXrRmLKgQG3")
 
-        assert error_message_locator.text_content().strip() == "Неверный логин/пароль. Проверьте данные"
+        assert sign_in_page.error_message_locator.text_content().strip() == "Неверный логин/пароль. Проверьте данные"
 
     def test_logout(self, page):
         """Тест выхода из системы"""
@@ -56,6 +55,4 @@ class TestRealCase:
 
         my_project_page.logout()
 
-        sigh_in_page_title = page.locator("div.VEk5WthgxYcIVhuIU03A > div > div.YhCboO0sYx3Lb7l8jhSG")
-
-        assert sigh_in_page_title.text_content().strip() == "[Epic]"
+        assert sign_in_page.title_locator.text_content().strip() == "[Epic]"
