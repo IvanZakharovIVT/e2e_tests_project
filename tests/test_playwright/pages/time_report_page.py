@@ -10,11 +10,24 @@ class TimeReportPage(BaseAuthorizedPage):
     CONFIRM_BUTTON_LOCATOR = ".XRVp4xxKofwvTTn6y8Y2"
     TOGGLE_LIST_ICON_LOCATOR = ".rGOECBNcTT2M4YU4zlJX"
     ACTIVITY_REPORTS_LOCATOR = ".SBRJyKo57H5f0mT3YNNL"
+    ROW_LABELS_LOCATOR = "tr.taskRow > td:nth-child(1) >div >div > a"
 
     @property
     def activity_reports(self) -> Locator:
         toggle_list_locator = self.page.locator(self.TOGGLE_LIST_ICON_LOCATOR)
         return toggle_list_locator.locator(self.ACTIVITY_REPORTS_LOCATOR)
+
+    @property
+    def row_labels(self) -> list[Locator]:
+        return self.page.locator(self.ROW_LABELS_LOCATOR).all()
+
+    def get_date_value_by_column(self, column_number: int) -> str:
+        return self.page.locator(
+            f".GSJEaIhqhOj5a1bwaWXu > th:nth-child({column_number}) > div"
+        ).text_content()[2:]
+
+    def get_active_toggles_in_row(self, row_number: int) -> list[Locator]:
+        return self.page.locator(f"tr.taskRow:nth-child({row_number}) > td > div > div > .toggleComment").all()
 
     def add_activity(self):
         """Добавление новой задачи"""

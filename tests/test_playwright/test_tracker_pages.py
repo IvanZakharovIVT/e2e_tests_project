@@ -12,7 +12,6 @@ class TestTrackerPages:
     """Тест добавления новой записи в трекер с использованием page object_model"""
     COMMENT_TEXT = "Разработка первых автотестов для работы с playwright (page object_model)"
     TASK_NAME = "Подготовка к интервью"
-    ROW_LABEL_LOCATOR = "tr.taskRow > td:nth-child(1) >div >div > a"
 
     def test_set_time(self, page):
         page.goto(TRACKER_URL)
@@ -40,18 +39,16 @@ class TestTrackerPages:
 
         # Поиск номера строки добавленной задачи
         row_number = None
-        for index, locator in enumerate(page.locator(self.ROW_LABEL_LOCATOR).all(), 1):
+        for index, locator in enumerate(time_report_page.row_labels, 1):
             if self.TASK_NAME in locator.text_content():
                 row_number = index
                 break
         assert row_number is not None
 
         # Получение позиции и даты, в которую необходимо записать время
-        toggles = page.locator(f"tr.taskRow:nth-child({row_number}) > td > div > div > .toggleComment")
-        column_number = len(toggles.all()) + 2
-        date_to_check = page.locator(
-            f".GSJEaIhqhOj5a1bwaWXu > th:nth-child({column_number}) > div"
-        ).text_content()[2:]
+        toggles = time_report_page.get_active_toggles_in_row(row_number)
+        column_number = len(toggles) + 2
+        date_to_check = time_report_page.get_date_value_by_column(column_number)
 
         # Добавление времени и комментария по строке и столбцу
         time_report_page.add_new_day_time(column_number, row_number, 8)
