@@ -8,11 +8,13 @@ class TimeReportPage(BaseAuthorizedPage):
     ADD_ACTIVITY_BUTTON_LOCATOR = ".addActivity"
     COMMENT_TEXTAREA_LOCATOR = "div.SUt_25F2Dvm9m866G6fm  > textarea"
     CONFIRM_BUTTON_LOCATOR = ".XRVp4xxKofwvTTn6y8Y2"
+    TOGGLE_LIST_ICON_LOCATOR = ".rGOECBNcTT2M4YU4zlJX"
+    ACTIVITY_REPORTS_LOCATOR = ".SBRJyKo57H5f0mT3YNNL"
 
     @property
     def activity_reports(self) -> Locator:
-        toggle_list_locator = self.page.locator(".rGOECBNcTT2M4YU4zlJX")
-        return toggle_list_locator.locator(".SBRJyKo57H5f0mT3YNNL")
+        toggle_list_locator = self.page.locator(self.TOGGLE_LIST_ICON_LOCATOR)
+        return toggle_list_locator.locator(self.ACTIVITY_REPORTS_LOCATOR)
 
     def add_activity(self):
         """Добавление новой задачи"""
