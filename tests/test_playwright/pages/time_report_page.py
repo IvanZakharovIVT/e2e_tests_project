@@ -27,13 +27,13 @@ class TimeReportPage(BaseAuthorizedPage):
         first_untrack_day.click()
         first_untrack_day.fill(str(time_value))
 
-    def add_comment_to_last_day(self, comment_text:str, column_number: int, row_number: int):
-        """Добавление комментария в ячейку по столбцу и строке"""
+    def click_to_comment_icon(self, column_number: int, row_number: int):
         comment = self.page.locator(
             f"tr.taskRow:nth-child({row_number}) > td:nth-child({column_number}) > div > div > .toggleComment"
         )
         comment.click(timeout=5000)
 
+    def add_comment(self, comment_text:str):
         comment_input = self.page.locator(self.COMMENT_TEXTAREA_LOCATOR)
         comment_input.click()
         comment_input.fill(comment_text, timeout=5000)
