@@ -19,18 +19,18 @@ class TimeReportPage(BaseAuthorizedPage):
         add_activity = self.page.locator(self.ADD_ACTIVITY_BUTTON_LOCATOR)
         add_activity.click()
 
-    def add_new_day_time(self, toggle_count: int, row_number: int, time_value: int):
+    def add_new_day_time(self, column_number: int, row_number: int, time_value: int):
         """Добавление времени в ячейку по столбцу и строке"""
         first_untrack_day = self.page.locator(
-            f"tr.taskRow:nth-child({row_number}) > td:nth-child({toggle_count + 2}) > div > div > input[value='0']"
+            f"tr.taskRow:nth-child({row_number}) > td:nth-child({column_number}) > div > div > input[value='0']"
         )
         first_untrack_day.click()
         first_untrack_day.fill(str(time_value))
 
-    def add_comment_to_last_day(self, comment_text:str, toggle_count: int, row_number: int):
+    def add_comment_to_last_day(self, comment_text:str, column_number: int, row_number: int):
         """Добавление комментария в ячейку по столбцу и строке"""
         comment = self.page.locator(
-            f"tr.taskRow:nth-child({row_number}) > td:nth-child({toggle_count + 2}) > div > div > .toggleComment"
+            f"tr.taskRow:nth-child({row_number}) > td:nth-child({column_number}) > div > div > .toggleComment"
         )
         comment.click(timeout=5000)
 

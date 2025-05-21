@@ -48,14 +48,14 @@ class TestTrackerPages:
 
         # Получение позиции и даты, в которую необходимо записать время
         toggles = page.locator(f"tr.taskRow:nth-child({row_number}) > td > div > div > .toggleComment")
-        toggle_count = len(toggles.all())
+        column_number = len(toggles.all()) + 2
         date_to_check = page.locator(
-            f".GSJEaIhqhOj5a1bwaWXu > th:nth-child({toggle_count + 2}) > div"
+            f".GSJEaIhqhOj5a1bwaWXu > th:nth-child({column_number}) > div"
         ).text_content()[2:]
 
         # Добавление времени и комментария по строке и столбцу
-        time_report_page.add_new_day_time(toggle_count, row_number, 8)
-        time_report_page.add_comment_to_last_day(self.COMMENT_TEXT, toggle_count, row_number)
+        time_report_page.add_new_day_time(column_number, row_number, 8)
+        time_report_page.add_comment_to_last_day(self.COMMENT_TEXT, column_number, row_number)
         time_report_page.confirm_comment()
 
         # Получение последнего элемента в списке отчету по всем дням
